@@ -31,7 +31,10 @@ class _HPState extends State<HP> {
   /// move the plant up Y↑
   _moveUp(MainHandler mock) {
     Timer.periodic(Duration(milliseconds: 100), (timer) {
-      if (ControllerButton(icon: Icons.home, onTap: () {  },).isTapping()) {
+      if (ControllerButton(
+        icon: Icons.home,
+        onTap: () {},
+      ).isTapping()) {
         setState(() {
           mock.moveUp(-0.05);
         });
@@ -44,7 +47,10 @@ class _HPState extends State<HP> {
   /// move the plant Down Y↓
   _moveDown(MainHandler mock) {
     Timer.periodic(Duration(milliseconds: 100), (timer) {
-      if (ControllerButton(icon: Icons.home, onTap: () {  },).isTapping()) {
+      if (ControllerButton(
+        icon: Icons.home,
+        onTap: () {},
+      ).isTapping()) {
         setState(() {
           mock.moveDown(0.05);
         });

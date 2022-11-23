@@ -38,10 +38,23 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
     "\n\nTap-and-hold on a cell will flag it, causing a flag to appear on it. Flagged cells are still considered covered.",
     "\n\nTo win the game, players must uncover all non-mine cells, at which point,",
   ];
+  int score = 0;
+  final imagesMap = [
+    {'image': 'assets/images/bitlabs.png', 'isMine': true},
+    {'image': 'assets/images/bitlabs.png', 'isMine': false},
+    {'image': 'assets/images/bitlabs.png', 'isMine': true},
+    {'image': 'assets/images/bitlabs.png', 'isMine': false},
+    {'image': 'assets/images/bitlabs.png', 'isMine': true},
+    {'image': 'assets/images/bitlabs.png', 'isMine': false},
+    {'image': 'assets/images/bitlabs.png', 'isMine': true},
+    {'image': 'assets/images/bitlabs.png', 'isMine': false},
+    {'image': 'assets/images/bitlabs.png', 'isMine': true}
+  ];
   var size = 3;
   var cells = [];
   var totalCellsRevealed = 0;
   var totalMines = 0;
+  bool warned = false;
 
   void generateGrid() {
     cells = [];
@@ -51,38 +64,18 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
     for (int i = 0; i < size; i++) {
       var row = [];
       for (int j = 0; j < size; j++) {
-        final cell = CellModel(i, j);
+        final cell =
+            CellModel(i, j, imagesMap[(i * 3) + j]['image'].toString());
         row.add(cell);
       }
       cells.add(row);
-    }
-
-    // Marking mines
-    for (int i = 0; i < size; ++i) {
-      cells[Random().nextInt(size)][Random().nextInt(size)].isMine = true;
-    }
-
-    // Counting mines
-    for (int i = 0; i < cells.length; ++i) {
-      for (int j = 0; j < cells[i].length; ++j) {
-        if (cells[i][j].isMine) totalMines++;
-      }
-    }
-
-    // Updating values of cells in Moore's neighbourhood of mines
-    for (int i = 0; i < cells.length; ++i) {
-      for (int j = 0; j < cells[i].length; ++j) {
-        if (cells[i][j].isMine) {
-          createInitialNumbersAroundMine(cells[i][j]);
-        }
-      }
     }
   }
 
   Widget buildButton(CellModel cell) {
     return GestureDetector(
       onLongPress: () {
-        markFlagged(cell);
+        // markFlagged(cell);
       },
       onTap: () {
         onTap(cell);
@@ -154,14 +147,10 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
                     children: rules
                         .map(
                           (e) => TextSpan(
-                        text: e,
-                            style: TextStyle(color: Colors.black)
-
-                      ),
-                    )
+                              text: e, style: TextStyle(color: Colors.black)),
+                        )
                         .toList(),
                   ),
-
                   textAlign: TextAlign.start,
                 ),
               ),
@@ -172,71 +161,76 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
     );
   }
 
-  void createInitialNumbersAroundMine(CellModel cell) {
-    // print("Checking mine at " + cell.x.toString() + ", " + cell.y.toString());
-    int xStart = (cell.x - 1) < 0 ? 0 : (cell.x - 1);
-    int xEnd = (cell.x + 1) > (size - 1) ? (size - 1) : (cell.x + 1);
-
-    int yStart = (cell.y - 1) < 0 ? 0 : (cell.y - 1);
-    int yEnd = (cell.y + 1) > (size - 1) ? (size - 1) : (cell.y + 1);
-
-    for (int i = xStart; i <= xEnd; ++i) {
-      for (int j = yStart; j <= yEnd; ++j) {
-        if (!cells[i][j].isMine) {
-          cells[i][j].value++;
-        }
-      }
-    }
-  }
-
-  void markFlagged(CellModel cell) {
-    cell.isFlagged = !cell.isFlagged;
-    setState(() {});
-  }
-
   void onTap(CellModel cell) async {
     // If the first tapped cell is a mine, regenerate the grid
     if (cell.isMine && totalCellsRevealed == 0) {
-      while (cells[cell.x][cell.y].isMine == true) {
+      while (imagesMap[(cell.x * 3) + cell.y]['isMine'] == true) {
         restart();
       }
 
       cell = cells[cell.x][cell.y];
     }
 
-    if (cell.isMine) {
-      unrevealRecursively(cell);
-      setState(() {});
-      final response = await showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: Text("Game Over"),
-          content: Text("You stepped on a mine. Be careful next time."),
-          actions: [
-            MaterialButton(
-              color: Colors.deepPurple,
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-              child: Text("Restart"),
-            ),
-          ],
-        ),
-      );
+    if (imagesMap[(cell.x * 3) + cell.y]['isMine'] == true) {
+      // unrevealRecursively(cell);
 
-      if (response) {
+      setState(() {
+        score--;
+      });
+      final response = await warned == false
+          ? showDialog(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                title: Text("Wrong Link"),
+                content: Text("Information about wrong link. Last Warning ☠️"),
+                actions: [
+                  MaterialButton(
+                    color: Colors.deepPurple,
+                    onPressed: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    child: Text("OK 😰"),
+                  ),
+                ],
+              ),
+            )
+          : showDialog(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                title: Text("Game Over 🙃"),
+                content: Text("Information about wrong link"),
+                actions: [
+                  MaterialButton(
+                    color: Colors.deepPurple,
+                    onPressed: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    child: Text("Adios"),
+                  ),
+                ],
+              ),
+            );
+
+      if (warned) {
+        setState(() {
+          warned = false;
+        });
         restart();
+      } else {
+        setState(() {
+          warned = true;
+        });
       }
       return;
     } else {
-      unrevealRecursively(cell);
       setState(() {});
       if (checkIfPlayerWon()) {
         final response = await showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
             title: Text("Congratulations"),
-            content: Text("You discovered all the tiles without stepping on any mines. Well done."),
+            content: Text(
+                "You discovered all the tiles without stepping on any mines. Well done."),
             actions: [
               MaterialButton(
                 color: Colors.deepPurple,
@@ -254,12 +248,15 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
           restart();
         }
       } else {
-        setState(() {});
+        setState(() {
+          score++;
+        });
       }
     }
   }
 
   void restart() {
+    score = 0;
     setState(() {
       generateGrid();
     });
@@ -270,33 +267,6 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
       return true;
     } else {
       return false;
-    }
-  }
-
-  void unrevealRecursively(CellModel cell) {
-    if (cell.x > size || cell.y > size || cell.x < 0 || cell.y < 0 || cell.isRevealed) {
-      return;
-    }
-
-    cell.isRevealed = true;
-    totalCellsRevealed++;
-
-    if (cell.value == 0) {
-      int xStart = (cell.x - 1) < 0 ? 0 : (cell.x - 1);
-      int xEnd = (cell.x + 1) > (size - 1) ? (size - 1) : (cell.x + 1);
-
-      int yStart = (cell.y - 1) < 0 ? 0 : (cell.y - 1);
-      int yEnd = (cell.y + 1) > (size - 1) ? (size - 1) : (cell.y + 1);
-
-      for (int i = xStart; i <= xEnd; ++i) {
-        for (int j = yStart; j <= yEnd; ++j) {
-          if (!cells[i][j].isMine && !cells[i][j].isRevealed && cells[i][j].value == 0) {
-            unrevealRecursively(cells[i][j]);
-          }
-        }
-      }
-    } else {
-      return;
     }
   }
 
@@ -314,7 +284,7 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
         title: Text("Minesweeper"),
         actions: [
           IconButton(
-            icon: Icon(Icons.fiber_new),
+            icon: Text(score.toString()),
             onPressed: () => restart(),
           ),
         ],
