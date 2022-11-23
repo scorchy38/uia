@@ -74,6 +74,7 @@ flutter:
     - assets/illustration/
     - assets/images/
     - assets/dice/
+    - lib/images/
 
   fonts:
     - family: ProductSans

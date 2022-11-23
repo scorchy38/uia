@@ -38,7 +38,7 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
     "\n\nTap-and-hold on a cell will flag it, causing a flag to appear on it. Flagged cells are still considered covered.",
     "\n\nTo win the game, players must uncover all non-mine cells, at which point,",
   ];
-  var size = 4;
+  var size = 3;
   var cells = [];
   var totalCellsRevealed = 0;
   var totalMines = 0;

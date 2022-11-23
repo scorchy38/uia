@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:uia/homepage.dart';
 import 'package:uia/screens/game/components/main_game.dart';
 import 'package:uia/screens/game/game.dart';
 import 'package:uia/screens/surveys/components/item_tile.dart';
@@ -223,8 +224,10 @@ class _HomeOptionsState extends State<HomeOptions> {
                               }),
                             SurveyTile('Virus Run', 'Virus Protection',
                                 'assets/images/pollfish.png', () {
-                                _launchURL(context,
-                                    'https://offers.cpx-research.com/index.php?app_id=11003&ext_user_id=vkumarsaraswat@gmail.com&username=vkumarsaraswat@gmail.com&email=vkumarsaraswat@gmail.com');
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Home()));
                               }),
 
                             SurveyTile('Us v/s Hackers', 'Cyber Crimes Learning',
