@@ -82,44 +82,65 @@ class _OrderPageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   elevation: 3,
-      //   backgroundColor: Colors.white,
-      //   title: const Text("Surveys❓️", style: TextStyle(
-      //     color: Colors.black
-      //   ),),
-      //   centerTitle: true,
-      //   // leading: const Text(''),
-      //   automaticallyImplyLeading: true,
-      // ),
-      body: GridView(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.9,
-        ),
+      appBar: AppBar(
+        elevation: 3,
+        backgroundColor: Colors.white,
+        title: const Text("Games️", style: TextStyle(
+          color: Colors.black
+        ),),
+        centerTitle: true,
+        // leading: const Text(''),
+        automaticallyImplyLeading: true,
+      ),
+      body: Column(
         children: [
-          SurveyTile(
-              'MineSweeper',
-              'Good Links vs Bad Links',
-              'assets/images/pollfish.png', () {
+          DropdownButton<String>(
+            value: 'Select Age',
+            items: <String>['Select Age', '4-6 Years', '7-11 Years', '12-15 Years'].map((String value) {
+              return DropdownMenuItem<String>(
 
-          }),
-          SurveyTile('PacMan', 'Virus Protection',
-              'assets/images/pollfish.png', () {
-                _launchURL(context,
-                    'https://offers.cpx-research.com/index.php?app_id=11003&ext_user_id=vkumarsaraswat@gmail.com&username=vkumarsaraswat@gmail.com&email=vkumarsaraswat@gmail.com');
-              }),
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            style: TextStyle(
+                color: Colors.black
+            ),
+            onChanged: (_) {},
+          ),
+          Expanded(
+            child: GridView(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.9,
+              ),
+              children: [
 
-          SurveyTile('Plants vs Zombies', 'Cyber Crimes Learning',
-              'assets/images/pollfish.png', () {
-                _launchURL(context,
-                    'https://surveywall.wannads.com?apiKey=62977e52beb71489487945&userId=vkumarsaraswat@gmail.com');
-              })
-          ,SurveyTile('Password Clash', 'Fight With a Friend',
-              'assets/images/pollfish.png', () {
-                _launchURL(context,
-                    'https://offers.monlix.com/?appid=2909&userid=vkumarsaraswat@gmail.com');
-              }),
+                SurveyTile(
+                    'MineSweeper',
+                    'Good Links vs Bad Links',
+                    'assets/images/pollfish.png', () {
+
+                }),
+                SurveyTile('PacMan', 'Virus Protection',
+                    'assets/images/pollfish.png', () {
+                      _launchURL(context,
+                          'https://offers.cpx-research.com/index.php?app_id=11003&ext_user_id=vkumarsaraswat@gmail.com&username=vkumarsaraswat@gmail.com&email=vkumarsaraswat@gmail.com');
+                    }),
+
+                SurveyTile('Plants vs Zombies', 'Cyber Crimes Learning',
+                    'assets/images/pollfish.png', () {
+                      _launchURL(context,
+                          'https://surveywall.wannads.com?apiKey=62977e52beb71489487945&userId=vkumarsaraswat@gmail.com');
+                    })
+                ,SurveyTile('Password Clash', 'Fight With a Friend',
+                    'assets/images/pollfish.png', () {
+                      _launchURL(context,
+                          'https://offers.monlix.com/?appid=2909&userid=vkumarsaraswat@gmail.com');
+                    }),
+              ],
+            ),
+          ),
         ],
       ),
     );

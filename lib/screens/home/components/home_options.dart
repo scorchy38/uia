@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:uia/homepage.dart';
 import 'package:uia/screens/game/components/main_game.dart';
 import 'package:uia/screens/game/game.dart';
+import 'package:uia/screens/home/home_page.dart';
+import 'package:uia/screens/home_page.dart';
 import 'package:uia/screens/surveys/components/item_tile.dart';
 import 'package:uia/services/current_user_change_notifier.dart';
 import 'package:uia/services/data_streams/user_stream.dart';
@@ -232,8 +234,11 @@ class _HomeOptionsState extends State<HomeOptions> {
 
                             SurveyTile('Us v/s Hackers', 'Cyber Crimes Learning',
                                 'assets/images/pollfish.png', () {
-                                _launchURL(context,
-                                    'https://surveywall.wannads.com?apiKey=62977e52beb71489487945&userId=vkumarsaraswat@gmail.com');
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HP()));
+
                               })
                             ,SurveyTile('Password Clash', 'Fight With a Friend',
                                 'assets/images/pollfish.png', () {
