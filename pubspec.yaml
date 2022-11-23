@@ -54,6 +54,7 @@ dependencies:
   cloud_functions: ^3.3.3
   firebase_auth_platform_interface: ^6.5.4
   cloud_firestore_odm: ^1.0.0-dev.27
+  password_strength: ^0.2.0
 
 
 dev_dependencies:

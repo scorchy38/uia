@@ -67,10 +67,14 @@ class UserDatabaseHelper {
       "fcm_token": token,
       "uid": uid,
       "userRank": 0,
+      "score": 0,
       // 'update': false,
     });
     log("New User Created");
   }
+
+
+
 
   Future<void> addPaymentMethod(
     String? country,
