@@ -128,7 +128,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
+      backgroundColor: Colors.white,
 
       body: (!gover && !nofood ) ?Column(
         children: [
@@ -204,20 +204,20 @@ class _HomeState extends State<Home> {
                        return Mypath(
                           // child: Text(index.toString()),
                            innercolor: Colors.yellow[300],
-                           outercolor: Colors.black87,
+                           outercolor: Colors.white,
                   );
                      }
                      else if (!food.contains(index) && s==true){
                        return Myfood(
-                         innercolor: Colors.black87,
-                         outercolor: Colors.black87,
+                         innercolor: Colors.white,
+                         outercolor: Colors.white,
                        );
                     }
                      else{
                        return Mypath(
                          //child: Text(index.toString()),
                          innercolor: Colors.yellow[300],
-                         outercolor: Colors.black87,
+                         outercolor: Colors.white,
                        );
                     }
                 }),
@@ -232,14 +232,14 @@ class _HomeState extends State<Home> {
                 children: [
                   Text("Score: "+ score.toString() ,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 40,
                     ),
                   ),
                   GestureDetector(
                     onTap: start,
                     child: Text("P L A Y",style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 40,
                     ),
                     ),

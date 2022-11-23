@@ -185,10 +185,11 @@ class _HPState extends State<HP> {
       flex: 5,
       child: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(Assets.garden),
-              fit: BoxFit.cover,
-            ),
+            color: Colors.white,
+            // image: DecorationImage(
+            //   image: AssetImage(Assets.garden),
+            //   fit: BoxFit.cover,
+            // ),
           ),
           child: _players()),
     );

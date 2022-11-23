@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
+
 class MyGhost extends StatelessWidget {
 
 
@@ -6,7 +8,10 @@ class MyGhost extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(3.0),
-      child: Image.asset('lib/images/ghost.png'),
+      child: Transform(
+          transform: Matrix4.rotationY(math.pi),
+          alignment: Alignment.center,
+          child: Image.asset('lib/images/trojan.png', )),
     );
   }
 }

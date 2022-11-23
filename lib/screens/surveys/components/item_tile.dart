@@ -29,7 +29,7 @@ class _SurveyTileState extends State<SurveyTile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CircleAvatar(
-                    backgroundColor: AppColors.primary,
+                    backgroundColor: Colors.white,
                     radius: 30,
                     child: CircleAvatar(
                       radius:28,

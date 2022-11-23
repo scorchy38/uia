@@ -169,7 +169,7 @@ class _HomeOptionsState extends State<HomeOptions> {
                         }),
                         optionCard(
                           AppColors.primary,
-                          'Watch Videos',
+                          'Videos/Comics',
                           'AND EARN',
                           'Watch Now',
                           'assets/images/coin.png',
@@ -215,9 +215,9 @@ class _HomeOptionsState extends State<HomeOptions> {
                       ),
                       children: [
                     SurveyTile(
-                                'Identify the Link',
+                                'Perfect Game',
                                 'Good Links vs Bad Links',
-                                'assets/images/pollfish.png', () {
+                                'assets/images/link.png', () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -225,15 +225,15 @@ class _HomeOptionsState extends State<HomeOptions> {
 
                               }),
                             SurveyTile('Virus Run', 'Virus Protection',
-                                'assets/images/pollfish.png', () {
+                                'assets/images/virus.png', () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => Home()));
                               }),
 
-                            SurveyTile('Us v/s Hackers', 'Cyber Crimes Learning',
-                                'assets/images/pollfish.png', () {
+                            SurveyTile('Hackers v/s Us', 'Cyber Crimes Learning',
+                                'assets/images/hacker.png', () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -241,7 +241,7 @@ class _HomeOptionsState extends State<HomeOptions> {
 
                               })
                             ,SurveyTile('Password Clash', 'Fight With a Friend',
-                                'assets/images/pollfish.png', () {
+                                'assets/images/clash.png', () {
                                 _launchURL(context,
                                     'https://offers.monlix.com/?appid=2909&userid=vkumarsaraswat@gmail.com');
                               }),
@@ -323,42 +323,42 @@ class _HomeOptionsState extends State<HomeOptions> {
                                 ?.copyWith(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 22)),
+                                    fontSize: 20)),
                         SizedBox(
                           height: 30,
                         ),
-                        Text(line1,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                ?.copyWith(
-                                    color: AppColors.primary,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold)),
+                        // Text(line1,
+                        //     style: Theme.of(context)
+                        //         .textTheme
+                        //         .headline6
+                        //         ?.copyWith(
+                        //             color: AppColors.primary,
+                        //             fontSize: 18,
+                        //             fontWeight: FontWeight.bold)),
                         SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(35)),
-                              color: AppColors.primary.withOpacity(0.4)),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 22.0, vertical: 12),
-                            child: Text('$reward',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6
-                                    ?.copyWith(
-                                        color: AppColors.primary,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold)),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
+                        // Container(
+                        //   decoration: BoxDecoration(
+                        //       borderRadius:
+                        //           BorderRadius.all(Radius.circular(35)),
+                        //       color: AppColors.primary.withOpacity(0.4)),
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.symmetric(
+                        //         horizontal: 22.0, vertical: 12),
+                        //     child: Text('$reward',
+                        //         style: Theme.of(context)
+                        //             .textTheme
+                        //             .headline6
+                        //             ?.copyWith(
+                        //                 color: AppColors.primary,
+                        //                 fontSize: 18,
+                        //                 fontWeight: FontWeight.bold)),
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   height: 30,
+                        // ),
                         Container(
                           decoration: BoxDecoration(
                               borderRadius:
@@ -392,7 +392,7 @@ class _HomeOptionsState extends State<HomeOptions> {
                 child: SizedBox(
                     height: 70,
                     child: CircleAvatar(
-                      backgroundColor: AppColors.white,
+                      backgroundColor: Colors.white,
                       child: Image.asset(
                         anim,
                         height: 50,

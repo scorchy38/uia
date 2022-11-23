@@ -6,6 +6,9 @@ import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 
 import 'package:flutter_pollfish/flutter_pollfish.dart';
 
+import '../../homepage.dart';
+import '../game/game.dart';
+import '../home_page.dart';
 import 'components/item_tile.dart';
 
 // Pollfish basic configuration options
@@ -77,7 +80,7 @@ class _OrderPageState extends State<OrderPage> {
       _logText = logText;
     });
   }
-
+  String age = 'Select Age';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +109,12 @@ class _OrderPageState extends State<OrderPage> {
             style: TextStyle(
                 color: Colors.black
             ),
-            onChanged: (_) {},
+            onChanged: (val) {
+              setState(() {
+                age = val!;
+
+              });
+            },
           ),
           Expanded(
             child: GridView(
@@ -117,24 +125,39 @@ class _OrderPageState extends State<OrderPage> {
               children: [
 
                 SurveyTile(
-                    'MineSweeper',
-                    'Good Links vs Bad Links',
-                    'assets/images/pollfish.png', () {
+                    'Perfect Game',
+                    'Identify the theft',
+                    'assets/images/link.png', () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FoodStylePage()));
+
+                }),SurveyTile(
+                    'Stranger\'s Call',
+                    'OTP Skills',
+                    'assets/images/wallet.png', () {
+                  _launchURL(context, 'https://studio.code.org/projects/applab/XHH5FtCXrSZwFJ62G59YkjhSezR3ndrB7vPp1gkEipU');
 
                 }),
-                SurveyTile('PacMan', 'Virus Protection',
-                    'assets/images/pollfish.png', () {
-                      _launchURL(context,
-                          'https://offers.cpx-research.com/index.php?app_id=11003&ext_user_id=vkumarsaraswat@gmail.com&username=vkumarsaraswat@gmail.com&email=vkumarsaraswat@gmail.com');
+                SurveyTile('Virus Run', 'Virus Protection',
+                    'assets/images/virus.png', () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Home()));
                     }),
 
-                SurveyTile('Plants vs Zombies', 'Cyber Crimes Learning',
-                    'assets/images/pollfish.png', () {
-                      _launchURL(context,
-                          'https://surveywall.wannads.com?apiKey=62977e52beb71489487945&userId=vkumarsaraswat@gmail.com');
+                SurveyTile('Hackers v/s Us', 'Cyber Crimes Learning',
+                    'assets/images/hacker.png', () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HP()));
+
                     })
                 ,SurveyTile('Password Clash', 'Fight With a Friend',
-                    'assets/images/pollfish.png', () {
+                    'assets/images/clash.png', () {
                       _launchURL(context,
                           'https://offers.monlix.com/?appid=2909&userid=vkumarsaraswat@gmail.com');
                     }),
@@ -235,11 +258,14 @@ class _OrderPageState extends State<OrderPage> {
     try {
       await launch(
         url,
+
         customTabsOption: const CustomTabsOption(
           toolbarColor: AppColors.primary,
           enableDefaultShare: true,
           enableUrlBarHiding: true,
           showPageTitle: true,
+
+
           // animation: CustomTabsAnimation.slideIn(),
           // // or user defined animation.
           // animation: const CustomTabsAnimation(

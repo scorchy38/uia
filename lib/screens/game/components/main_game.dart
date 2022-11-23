@@ -31,24 +31,18 @@ class FoodSuggestions extends StatefulWidget {
 
 class _FoodSuggestionsState extends State<FoodSuggestions>
     with SingleTickerProviderStateMixin {
-  final rules = [
-    "Rules",
-    "\n\nA player taps on a cell to uncover it. If a player uncovers a mined cell, the game ends, as there is only 1 life per game.",
-    "\n\nOtherwise, the uncovered cells displays either a number, indicating the quantity of mines diagonally and/or adjacent to it, or a blank tile (or \"0\"), and all adjacent non-mined cells will automatically be uncovered.",
-    "\n\nTap-and-hold on a cell will flag it, causing a flag to appear on it. Flagged cells are still considered covered.",
-    "\n\nTo win the game, players must uncover all non-mine cells, at which point,",
-  ];
+
   int score = 0;
   final imagesMap = [
-    {'image': 'assets/images/bitlabs.png', 'isMine': true},
-    {'image': 'assets/images/bitlabs.png', 'isMine': false},
-    {'image': 'assets/images/bitlabs.png', 'isMine': true},
-    {'image': 'assets/images/bitlabs.png', 'isMine': false},
-    {'image': 'assets/images/bitlabs.png', 'isMine': true},
-    {'image': 'assets/images/bitlabs.png', 'isMine': false},
-    {'image': 'assets/images/bitlabs.png', 'isMine': true},
-    {'image': 'assets/images/bitlabs.png', 'isMine': false},
-    {'image': 'assets/images/bitlabs.png', 'isMine': true}
+    {'image': 'assets/images/goodLink.png', 'isMine': false},
+    {'image': 'assets/images/badLink.png', 'isMine': true},
+    {'image': 'assets/images/fairOrder.png', 'isMine': false},
+    {'image': 'assets/images/freeOrder.png', 'isMine': true},
+    {'image': 'assets/images/playDownload.png', 'isMine': false},
+    {'image': 'assets/images/malwareDownload.png', 'isMine': true},
+    {'image': 'assets/images/appstoreDownload.png', 'isMine': false},
+    {'image': 'assets/images/fakecall.png', 'isMine': true},
+    {'image': 'assets/images/realcall.png', 'isMine': false}
   ];
   var size = 3;
   var cells = [];
@@ -75,7 +69,6 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
   Widget buildButton(CellModel cell) {
     return GestureDetector(
       onLongPress: () {
-        // markFlagged(cell);
       },
       onTap: () {
         onTap(cell);
@@ -141,19 +134,19 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
           padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0),
           child: Row(
             children: [
-              Expanded(
-                child: RichText(
-                  text: TextSpan(
-                    children: rules
-                        .map(
-                          (e) => TextSpan(
-                              text: e, style: TextStyle(color: Colors.black)),
-                        )
-                        .toList(),
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
+              // Expanded(
+              //   child: RichText(
+              //     text: TextSpan(
+              //       children: rules
+              //           .map(
+              //             (e) => TextSpan(
+              //                 text: e, style: TextStyle(color: Colors.black)),
+              //           )
+              //           .toList(),
+              //     ),
+              //     textAlign: TextAlign.start,
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -172,7 +165,6 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
     }
 
     if (imagesMap[(cell.x * 3) + cell.y]['isMine'] == true) {
-      // unrevealRecursively(cell);
 
       setState(() {
         score--;
@@ -281,7 +273,7 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: Text("Minesweeper"),
+        title: Text("Perfect Game"),
         actions: [
           IconButton(
             icon: Text(score.toString()),

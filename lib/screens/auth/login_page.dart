@@ -45,11 +45,11 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Spacer(),
               Image.asset(
-                'assets/dice/logo.png',
+                'assets/images/logo.png',
                 height: 150,
               ),
               const SizedBox(height: 8),
-              Text('Cyber Shield',
+              Text('Play Safe',
                   style: Theme.of(context).textTheme.headline6?.copyWith(
                       color: Colors.black,
                       fontWeight: FontWeight.w900,
