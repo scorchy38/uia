@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uia/screens/game/components/main_game.dart';
 
 import 'cell.dart';
 
@@ -30,7 +31,19 @@ class _CellWidgetState extends State<CellWidget> {
                 : Colors.grey[200 + (widget.cell.value * 50)])
             : Colors.white,
       ),
-      child: Center(child: Image.asset(widget.cell.image)),
+      child: widget.cell.isRevealed
+          ? imagesMap[(widget.cell.x * 3) + widget.cell.y]['isMine'] == true
+              ? Container(
+                  color: Colors.red,
+                  height: 20,
+                  width: 20,
+                )
+              : Container(
+                  color: Colors.green,
+                  height: 20,
+                  width: 20,
+                )
+          : Center(child: Image.asset(widget.cell.image)),
     );
   }
 }

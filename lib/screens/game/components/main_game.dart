@@ -29,21 +29,22 @@ class FoodSuggestions extends StatefulWidget {
   State<FoodSuggestions> createState() => _FoodSuggestionsState();
 }
 
+final imagesMap = [
+  {'image': 'assets/images/goodLink.png', 'isMine': false},
+  {'image': 'assets/images/badLink.png', 'isMine': true},
+  {'image': 'assets/images/fairOrder.png', 'isMine': false},
+  {'image': 'assets/images/freeOrder.png', 'isMine': true},
+  {'image': 'assets/images/playDownload.png', 'isMine': false},
+  {'image': 'assets/images/malwareDownload.png', 'isMine': true},
+  {'image': 'assets/images/appstoreDownload.png', 'isMine': false},
+  {'image': 'assets/images/fakecall.png', 'isMine': true},
+  {'image': 'assets/images/realcall.png', 'isMine': false}
+];
+
 class _FoodSuggestionsState extends State<FoodSuggestions>
     with SingleTickerProviderStateMixin {
-
   int score = 0;
-  final imagesMap = [
-    {'image': 'assets/images/goodLink.png', 'isMine': false},
-    {'image': 'assets/images/badLink.png', 'isMine': true},
-    {'image': 'assets/images/fairOrder.png', 'isMine': false},
-    {'image': 'assets/images/freeOrder.png', 'isMine': true},
-    {'image': 'assets/images/playDownload.png', 'isMine': false},
-    {'image': 'assets/images/malwareDownload.png', 'isMine': true},
-    {'image': 'assets/images/appstoreDownload.png', 'isMine': false},
-    {'image': 'assets/images/fakecall.png', 'isMine': true},
-    {'image': 'assets/images/realcall.png', 'isMine': false}
-  ];
+
   var size = 3;
   var cells = [];
   var totalCellsRevealed = 0;
@@ -68,8 +69,7 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
 
   Widget buildButton(CellModel cell) {
     return GestureDetector(
-      onLongPress: () {
-      },
+      onLongPress: () {},
       onTap: () {
         onTap(cell);
       },
@@ -165,9 +165,9 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
     }
 
     if (imagesMap[(cell.x * 3) + cell.y]['isMine'] == true) {
-
       setState(() {
         score--;
+        cell.isRevealed = true;
       });
       final response = await warned == false
           ? showDialog(
@@ -217,6 +217,7 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
     } else {
       setState(() {});
       if (checkIfPlayerWon()) {
+        print(checkIfPlayerWon());
         final response = await showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
@@ -236,12 +237,12 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
         );
 
         if (response) {
-          size++;
           restart();
         }
       } else {
         setState(() {
           score++;
+          cell.isRevealed = true;
         });
       }
     }
@@ -255,7 +256,7 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
   }
 
   bool checkIfPlayerWon() {
-    if (totalCellsRevealed + totalMines == size * size) {
+    if (score > 3) {
       return true;
     } else {
       return false;
