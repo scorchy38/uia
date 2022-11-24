@@ -205,19 +205,21 @@ class _HomeOptionsState extends State<HomeOptions> {
                       : Container(),
 
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.55,
+                    height: MediaQuery.of(context).size.height * 0.68,
                     child: GridView(
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 0.9,
+                        childAspectRatio: 0.7,
                       ),
                       children: [
                     SurveyTile(
                                 'Perfect Game',
                                 'Good Links vs Bad Links',
-                                'assets/images/link.png', () {
+                                'assets/images/link.png',
+                        '4-6',
+                            () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -225,7 +227,9 @@ class _HomeOptionsState extends State<HomeOptions> {
 
                               }),
                             SurveyTile('Virus Run', 'Virus Protection',
-                                'assets/images/virus.png', () {
+                                'assets/images/virus.png',
+                                '4-6',
+                                    () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -233,7 +237,9 @@ class _HomeOptionsState extends State<HomeOptions> {
                               }),
 
                             SurveyTile('Hackers v/s Us', 'Cyber Crimes Learning',
-                                'assets/images/hacker.png', () {
+                                'assets/images/hacker.png',
+                                '4-6',
+                                    () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -241,7 +247,9 @@ class _HomeOptionsState extends State<HomeOptions> {
 
                               })
                             ,SurveyTile('Password Clash', 'Fight With a Friend',
-                                'assets/images/clash.png', () {
+                                'assets/images/clash.png',
+                            '4-6',
+                                () {
                                 _launchURL(context,
                                     'https://offers.monlix.com/?appid=2909&userid=vkumarsaraswat@gmail.com');
                               }),

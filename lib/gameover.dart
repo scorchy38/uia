@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uia/core/constants/app_colors.dart';
 class Gameover extends StatelessWidget {
   final t;
   //final Function reset;
@@ -12,19 +13,19 @@ class Gameover extends StatelessWidget {
 
 
           child: Container(
-            color: Colors.grey,
+            color: AppColors.primary,
             width: double.infinity,
             child: Padding(
-             padding: const EdgeInsets.only(top: 350),
+             padding: const EdgeInsets.only(top: 100),
               child: Column(
               children: [
-
+                  Image.asset('assets/images/trojan.gif', height: 250,),
                   Container(
 
                     child: Text( "Game Over!!!",
                       style: TextStyle(
                         fontSize: 40,
-                        color: Colors.yellow[500],
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

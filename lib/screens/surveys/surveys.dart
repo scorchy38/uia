@@ -97,37 +97,21 @@ class _OrderPageState extends State<OrderPage> {
       ),
       body: Column(
         children: [
-          DropdownButton<String>(
-            value: 'Select Age',
-            items: <String>['Select Age', '4-6 Years', '7-11 Years', '12-15 Years'].map((String value) {
-              return DropdownMenuItem<String>(
 
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            style: TextStyle(
-                color: Colors.black
-            ),
-            onChanged: (val) {
-              setState(() {
-                age = val!;
-
-              });
-            },
-          ),
           Expanded(
             child: GridView(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.9,
+                childAspectRatio: 0.7,
               ),
               children: [
 
                 SurveyTile(
                     'Perfect Game',
                     'Identify the theft',
-                    'assets/images/link.png', () {
+                    'assets/images/link.png',
+                        '4-6',
+                        () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -136,12 +120,14 @@ class _OrderPageState extends State<OrderPage> {
                 }),SurveyTile(
                     'Stranger\'s Call',
                     'OTP Skills',
-                    'assets/images/wallet.png', () {
+                    'assets/images/wallet.png',
+                    '4-6',() {
                   _launchURL(context, 'https://studio.code.org/projects/applab/XHH5FtCXrSZwFJ62G59YkjhSezR3ndrB7vPp1gkEipU');
 
                 }),
                 SurveyTile('Virus Run', 'Virus Protection',
-                    'assets/images/virus.png', () {
+                    'assets/images/virus.png',
+                    '4-6',() {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -149,7 +135,7 @@ class _OrderPageState extends State<OrderPage> {
                     }),
 
                 SurveyTile('Hackers v/s Us', 'Cyber Crimes Learning',
-                    'assets/images/hacker.png', () {
+                    'assets/images/hacker.png', '4-6', () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -157,7 +143,7 @@ class _OrderPageState extends State<OrderPage> {
 
                     })
                 ,SurveyTile('Password Clash', 'Fight With a Friend',
-                    'assets/images/clash.png', () {
+                    'assets/images/clash.png',  '4-6', () {
                       _launchURL(context,
                           'https://offers.monlix.com/?appid=2909&userid=vkumarsaraswat@gmail.com');
                     }),
