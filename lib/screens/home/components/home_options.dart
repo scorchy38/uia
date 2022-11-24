@@ -4,6 +4,8 @@ import 'package:uia/screens/game/components/main_game.dart';
 import 'package:uia/screens/game/game.dart';
 import 'package:uia/screens/home/home_page.dart';
 import 'package:uia/screens/home_page.dart';
+import 'package:uia/screens/passwordClash/pcGameScreen.dart';
+import 'package:uia/screens/passwordClash/startGameScreen.dart';
 import 'package:uia/screens/surveys/components/item_tile.dart';
 import 'package:uia/services/current_user_change_notifier.dart';
 import 'package:uia/services/data_streams/user_stream.dart';
@@ -37,7 +39,6 @@ class _HomeOptionsState extends State<HomeOptions> {
     generateFourNumbers();
     getRatedStatusNow();
 
-
     currentUserChangeNotifier.setCurrentUser(true);
     super.initState();
     userStream.init();
@@ -48,7 +49,6 @@ class _HomeOptionsState extends State<HomeOptions> {
     userStream.dispose();
     super.dispose();
   }
-
 
   String _logText = '';
 
@@ -70,13 +70,6 @@ class _HomeOptionsState extends State<HomeOptions> {
       return const Text('Pollfish Offerwall Integration');
     }
   }
-
-
-
-
-
-
-
 
   void _launchURL(BuildContext context, String url) async {
     try {
@@ -174,34 +167,32 @@ class _HomeOptionsState extends State<HomeOptions> {
                           'Watch Now',
                           'assets/images/coin.png',
                           '5 Points📈',
-                              () async {
-
-                          },
+                          () async {},
                         ),
                       ],
                     ),
                   ),
                   user!.activated == true
                       ? Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: AppDefaults.padding - 2),
-                    child: Row(
-                      children: [
-                        // optionCardHorizontal(
-                        //     AppColors.primary,
-                        //     'Refer & Earn️',
-                        //     'UP TO',
-                        //     'Go Now',
-                        //     'assets/images/playstore.png',
-                        //     '\$0.01 ', () {
-                        //   Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (context) => ReferEarn()));
-                        // })
-                      ],
-                    ),
-                  )
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: AppDefaults.padding - 2),
+                          child: Row(
+                            children: [
+                              // optionCardHorizontal(
+                              //     AppColors.primary,
+                              //     'Refer & Earn️',
+                              //     'UP TO',
+                              //     'Go Now',
+                              //     'assets/images/playstore.png',
+                              //     '\$0.01 ', () {
+                              //   Navigator.push(
+                              //       context,
+                              //       MaterialPageRoute(
+                              //           builder: (context) => ReferEarn()));
+                              // })
+                            ],
+                          ),
+                        )
                       : Container(),
 
                   Container(
@@ -214,46 +205,30 @@ class _HomeOptionsState extends State<HomeOptions> {
                         childAspectRatio: 0.7,
                       ),
                       children: [
-                    SurveyTile(
-                                'Perfect Game',
-                                'Good Links vs Bad Links',
-                                'assets/images/link.png',
-                        '4-6',
-                            () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => FoodStylePage()));
-
-                              }),
-                            SurveyTile('Virus Run', 'Virus Protection',
-                                'assets/images/virus.png',
-                                '4-6',
-                                    () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Home()));
-                              }),
-
-                            SurveyTile('Hackers v/s Us', 'Cyber Crimes Learning',
-                                'assets/images/hacker.png',
-                                '4-6',
-                                    () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HP()));
-
-                              })
-                            ,SurveyTile('Password Clash', 'Fight With a Friend',
-                                'assets/images/clash.png',
-                            '4-6',
-                                () {
-                                _launchURL(context,
-                                    'https://offers.monlix.com/?appid=2909&userid=vkumarsaraswat@gmail.com');
-                              }),
-
+                        SurveyTile('Perfect Game', 'Good Links vs Bad Links',
+                            'assets/images/link.png', '4-6', () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FoodStylePage()));
+                        }),
+                        SurveyTile('Virus Run', 'Virus Protection',
+                            'assets/images/virus.png', '4-6', () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Home()));
+                        }),
+                        SurveyTile('Hackers v/s Us', 'Cyber Crimes Learning',
+                            'assets/images/hacker.png', '4-6', () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => HP()));
+                        }),
+                        SurveyTile('Password Clash', 'Fight With a Friend',
+                            'assets/images/clash.png', '4-6', () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => StartGameScreen()));
+                        }),
                       ],
                     ),
                   ),

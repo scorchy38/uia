@@ -26,7 +26,7 @@ class RoomDatabaseHelper {
 
   RoomDatabaseHelper._privateConstructor();
   static final RoomDatabaseHelper _instance =
-  RoomDatabaseHelper._privateConstructor();
+      RoomDatabaseHelper._privateConstructor();
   factory RoomDatabaseHelper() {
     return _instance;
   }
@@ -42,20 +42,18 @@ class RoomDatabaseHelper {
   String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
       length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
-
   Future<String> createRoom() async {
     String rid = getRandomString(5);
     await firestore?.collection('rooms').doc(rid).set({
       'roomId': rid,
       'uid1': AuthenticationService().currentUser?.uid,
-      'open' : true,
-      'score11' : 0.0,
-      'score12' : 0.0,
-      'score13' : 0.0,
-      'score21' : 0.0,
-      'score22' : 0.0,
-      'score23' : 0.0,
-
+      'open': true,
+      'score11': 0.0,
+      'score12': 0.0,
+      'score13': 0.0,
+      'score21': 0.0,
+      'score22': 0.0,
+      'score23': 0.0,
     });
     return rid;
   }
@@ -63,35 +61,35 @@ class RoomDatabaseHelper {
   Future<void> updateGameScore(round, roomId, user, score) async {
     await firestore?.collection('rooms').doc(roomId).update({
       'score$user$round': score,
-
     });
   }
 
   Future<void> joinGame(roomId) async {
     await firestore?.collection('rooms').doc(roomId).update({
       'uid2': AuthenticationService().currentUser?.uid,
-
     });
   }
 
   Future<int> findWinner(roomId) async {
     await firestore?.collection('rooms').doc(roomId).get().then((value) {
-      int score1 = value.data()!['score11'] + value.data()!['score12'] + value.data()!['score13'];
-      int score2 = value.data()!['score21'] + value.data()!['score22'] + value.data()!['score23'];
-      if(score1>score2) return 0;
-      if(score1<score2) return 1;
-      if(score1==score2) return 2;
-
+      double score1 = value.data()!['score11'] +
+          value.data()!['score12'] +
+          value.data()!['score13'];
+      double score2 = value.data()!['score21'] +
+          value.data()!['score22'] +
+          value.data()!['score23'];
+      print(score1);
+      print(score2);
+      if (score1 > score2) return 1;
+      if (score1 < score2) return 2;
+      if (score1 == score2) return 0;
     });
     return 2;
   }
 
-  double calculateStrength(password){
+  double calculateStrength(password) {
     double strength = estimatePasswordStrength(password);
 
     return strength;
-
   }
-
-
 }
