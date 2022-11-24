@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lottie/lottie.dart';
 import 'package:uia/screens/passwordClash/constant.dart';
 import 'package:uia/services/database/room_database_helper.dart';
 
@@ -31,6 +32,8 @@ class _PCGameScreenState extends State<PCGameScreen> {
     // TODO: implement initState
     super.initState();
   }
+  var totalScore = -1;
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +65,7 @@ class _PCGameScreenState extends State<PCGameScreen> {
             SizedBox(
               height: 20,
             ),
-            Text('Round ${score+1}\n FIGHT!', style: tstyle,),
+            Text('Round ${currentLevel}\n FIGHT!', style: tstyle,),
             new Flexible(
                 child: StreamBuilder<DocumentSnapshot<Map<dynamic, dynamic>>>(
                     stream: FirebaseFirestore.instance
@@ -81,7 +84,6 @@ class _PCGameScreenState extends State<PCGameScreen> {
                             gameData['score${opponentNumber}$currentLevel'] !=
                                 0 &&
                             currentLevel < 3) currentLevel++;
-                        var totalScore = -1;
                         if (currentLevel == 3) {
                           double score1 = gameData!['score11'] +
                               gameData!['score12'] +
@@ -91,7 +93,7 @@ class _PCGameScreenState extends State<PCGameScreen> {
                               gameData!['score23'];
                           print(score1);
                           print(score2);
-                          if (score1 > score2) totalScore = 1;
+                          if (score1 > score2) {totalScore = 1;};
                           if (score1 < score2) totalScore = 2;
                           if (score1 == score2) totalScore = 0;
                         }
@@ -102,17 +104,28 @@ class _PCGameScreenState extends State<PCGameScreen> {
                             : gameData['score${opponentNumber}$currentLevel'] == 0
                                 ? Center(child: Text('Waiting for opponent\'s turn', style: tstyle,))
                                 : Center(
-                                  child: Text(totalScore == 0
-                                      ? 'Draw'
-                                      : totalScore == 1 && widget.userNumber == 1
+                                  child: Column(
+                                    children: [
+
+                                      (totalScore == 1 && widget.userNumber == 1) || totalScore == 2 &&
+                                          widget.userNumber == 2   ? Lottie.asset('assets/pics/winning.json') : Padding(
+                                            padding: const EdgeInsets.only(top: 68.0),
+                                            child: Lottie.asset('assets/pics/lose.json', height: 200),
+                                          ),
+                                      Text(totalScore == 0
+                                          ? 'Draw ⭐️'
+                                          : totalScore == 1 && widget.userNumber == 1
                                           ? 'You Won 🎉'
                                           : totalScore == 2 &&
-                                                  widget.userNumber == 2
-                                              ? 'Won'
-                                              : 'Defeated', style: tstyle,),
+                                          widget.userNumber == 2
+                                          ? 'Won'
+                                          : 'Better Luck Next Time! 🤓', style: tstyle,),
+                                    ],
+                                  ),
                                 );
                       }
                     })),
+           // RoomDatabaseHelper().gameCompleted(widget.gameID)==1 ?  : Container(),
             // new Divider(height: 1.0),
             Container(
               height: 20,

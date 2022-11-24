@@ -87,6 +87,17 @@ class RoomDatabaseHelper {
     return 2;
   }
 
+  Future<int> gameCompleted(roomId) async {
+    await firestore?.collection('rooms').doc(roomId).get().then((value) {
+     if(value.data()!['score11']!=0 && value.data()!['score12']!=0 && value.data()!['score13']!=0 && value.data()!['score21']!=0 && value.data()!['score22']!=0 && value.data()!['score23']!=0){
+       return 1;
+     }});
+
+
+
+    return 0;
+  }
+
   double calculateStrength(password) {
     double strength = estimatePasswordStrength(password);
 

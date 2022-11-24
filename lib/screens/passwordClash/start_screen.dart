@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uia/screens/passwordClash/pcGameScreen.dart';
@@ -18,14 +19,27 @@ class StartScreen extends StatefulWidget {
 class _StartScreenState extends State<StartScreen> {
 
   final myBox = 'Hive.box()';
+  final assetsAudioPlayer = AssetsAudioPlayer();
 
   @override
   void initState() {
     // Todo : initialize the database  <---
     initial();
+    assetsAudioPlayer.open(
+
+
+      Audio("assets/audios/mainapp.mp3"),
+      autoStart: true,
+      showNotification: false,
+      playInBackground: PlayInBackground.disabledPause,
+
+      loopMode: LoopMode.none
+    );
     super.initState();
   }
-
+WillPopScope(){
+    assetsAudioPlayer.stop();
+}
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery
