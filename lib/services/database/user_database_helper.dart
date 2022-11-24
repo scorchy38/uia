@@ -73,9 +73,6 @@ class UserDatabaseHelper {
     log("New User Created");
   }
 
-
-
-
   Future<void> addPaymentMethod(
     String? country,
     String? paymentMethod,
@@ -168,6 +165,27 @@ class UserDatabaseHelper {
     paymentMethod = doc?.data();
 
     return paymentMethod;
+  }
+
+  Future<bool> updateScore(bool win, String opponentsID) async {
+    String? email = AuthenticationService().currentUser?.email;
+    final doc = await firestore?.collection('users').doc(email);
+    doc?.get().then((value) {
+      int score = value.data()!['score'];
+      print(score);
+      doc.update({'score': win ? score + 50 : score - 10});
+    });
+
+    final doc2 = await firestore
+        ?.collection('users')
+        .where('uid', isEqualTo: opponentsID);
+    doc2?.get().then((value) {
+      int score = value.docs[0].data()!['score'];
+      print(score);
+      value.docs[0].reference.update({'score': win ? score - 10 : score + 50});
+    });
+
+    return true;
   }
 
   Future<List<tr.Transaction>>? getUserTransactions() async {
@@ -313,75 +331,63 @@ class UserDatabaseHelper {
   }
 
   cloudTicket(int val) async {
-
-      HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'surgeTikt',
-        options: HttpsCallableOptions(
-          timeout: const Duration(seconds: 10),
-        ),
-      );
-      final result = callable.call({"increase": val});
-
+    HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
+      'surgeTikt',
+      options: HttpsCallableOptions(
+        timeout: const Duration(seconds: 10),
+      ),
+    );
+    final result = callable.call({"increase": val});
   }
 
   cloudAdSurge() async {
-
-      HttpsCallable callable2 = FirebaseFunctions.instance.httpsCallable(
-        'surgeAdCunt',
-        options: HttpsCallableOptions(
-          timeout: const Duration(seconds: 10),
-        ),
-      );
-      final result2 = callable2.call();
-
+    HttpsCallable callable2 = FirebaseFunctions.instance.httpsCallable(
+      'surgeAdCunt',
+      options: HttpsCallableOptions(
+        timeout: const Duration(seconds: 10),
+      ),
+    );
+    final result2 = callable2.call();
   }
 
   cloudGoldSurge(int val) async {
-
-      HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'surgeCoinVal',
-        options: HttpsCallableOptions(
-          timeout: const Duration(seconds: 10),
-        ),
-      );
-      final result = callable.call({"increase": val});
-
+    HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
+      'surgeCoinVal',
+      options: HttpsCallableOptions(
+        timeout: const Duration(seconds: 10),
+      ),
+    );
+    final result = callable.call({"increase": val});
   }
 
   cloudReferReward(String referCode) async {
-
-      HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'referReward',
-        options: HttpsCallableOptions(
-          timeout: const Duration(seconds: 10),
-        ),
-      );
-      final result = callable.call({"referCode": referCode});
-
+    HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
+      'referReward',
+      options: HttpsCallableOptions(
+        timeout: const Duration(seconds: 10),
+      ),
+    );
+    final result = callable.call({"referCode": referCode});
   }
 
   cloudWithdraw(double amount) async {
-
-      HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'requestPayout',
-        options: HttpsCallableOptions(
-          timeout: const Duration(seconds: 10),
-        ),
-      );
-      final result = callable.call({"amount": amount});
-
+    HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
+      'requestPayout',
+      options: HttpsCallableOptions(
+        timeout: const Duration(seconds: 10),
+      ),
+    );
+    final result = callable.call({"amount": amount});
   }
 
   cloudRateUs() async {
-
-      HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'rateUsReward',
-        options: HttpsCallableOptions(
-          timeout: const Duration(seconds: 10),
-        ),
-      );
-      final result = callable.call();
-
+    HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
+      'rateUsReward',
+      options: HttpsCallableOptions(
+        timeout: const Duration(seconds: 10),
+      ),
+    );
+    final result = callable.call();
   }
 
   updateGold(int amnt) async {

@@ -49,6 +49,12 @@ class RoomDatabaseHelper {
       'uid1': AuthenticationService().currentUser?.uid,
       'open': true,
       'score11': 0.0,
+      'ans11': '',
+      'ans12': '',
+      'ans13': '',
+      'ans21': '',
+      'ans22': '',
+      'ans23': '',
       'score12': 0.0,
       'score13': 0.0,
       'score21': 0.0,
@@ -58,9 +64,10 @@ class RoomDatabaseHelper {
     return rid;
   }
 
-  Future<void> updateGameScore(round, roomId, user, score) async {
+  Future<void> updateGameScore(round, roomId, user, score, pass) async {
     await firestore?.collection('rooms').doc(roomId).update({
       'score$user$round': score,
+      'ans$user$round': pass,
     });
   }
 
@@ -89,11 +96,15 @@ class RoomDatabaseHelper {
 
   Future<int> gameCompleted(roomId) async {
     await firestore?.collection('rooms').doc(roomId).get().then((value) {
-     if(value.data()!['score11']!=0 && value.data()!['score12']!=0 && value.data()!['score13']!=0 && value.data()!['score21']!=0 && value.data()!['score22']!=0 && value.data()!['score23']!=0){
-       return 1;
-     }});
-
-
+      if (value.data()!['score11'] != 0 &&
+          value.data()!['score12'] != 0 &&
+          value.data()!['score13'] != 0 &&
+          value.data()!['score21'] != 0 &&
+          value.data()!['score22'] != 0 &&
+          value.data()!['score23'] != 0) {
+        return 1;
+      }
+    });
 
     return 0;
   }
