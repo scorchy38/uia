@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:uia/screens/auth/login_page.dart';
 import 'package:uia/screens/profile/components/edit_profile.dart';
 import 'package:uia/screens/profile/components/leaderboard.dart';
 import 'package:uia/screens/profile/components/refer_earn.dart';
@@ -266,18 +267,18 @@ class _UserDataPageState extends State<UserDataPage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const Wallet()));
-                                }, EvaIcons.creditCardOutline, '   Wallet')
+                                              const LoginPage()));
+                                }, EvaIcons.creditCardOutline, '   Login to Get Certificate')
                               : Container(),
-                          user?.activated == true
-                              ? profileOption(() {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const ReferEarn()));
-                                }, EvaIcons.peopleOutline, '   Refer & Earn')
-                              : Container(),
+                          // user?.activated == true
+                          //     ? profileOption(() {
+                          //         Navigator.push(
+                          //             context,
+                          //             MaterialPageRoute(
+                          //                 builder: (context) =>
+                          //                     const ReferEarn()));
+                          //       }, EvaIcons.peopleOutline, '   Refer & Earn')
+                          //     : Container(),
                           profileOption(() {
                             Navigator.push(
                                 context,
@@ -299,18 +300,18 @@ class _UserDataPageState extends State<UserDataPage> {
                                           .LaunchMode.externalApplication);
                                 }, EvaIcons.barChart2Outline, '   Rate Us')
                               : Container(),
-                          profileOption(() async {
-                            await UserDatabaseHelper().updateUserDeviceId('NA');
-                            AuthenticationService().signOutGoogle();
-                            AuthenticationService().signOut();
-                            AuthenticationService()
-                                .setLocalAuthStatus('NotLoggedIn');
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        AuthenticationWrapper()));
-                          }, EvaIcons.unlockOutline, '   Logout'),
+                          // profileOption(() async {
+                          //   await UserDatabaseHelper().updateUserDeviceId('NA');
+                          //   AuthenticationService().signOutGoogle();
+                          //   AuthenticationService().signOut();
+                          //   AuthenticationService()
+                          //       .setLocalAuthStatus('NotLoggedIn');
+                          //   Navigator.pushReplacement(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //           builder: (context) =>
+                          //               AuthenticationWrapper()));
+                          // }, EvaIcons.unlockOutline, '   Logout'),
                         ],
                       ),
                       const SizedBox(

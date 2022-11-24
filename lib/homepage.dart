@@ -130,126 +130,135 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      body: (!gover && !nofood ) ?Column(
-        children: [
-          Expanded(
-            flex: 5,
-            child: GestureDetector(
-              onVerticalDragUpdate: (details){
-                if(details.delta.dy >0){
-                  dir="down";
-                }
-                else if(details.delta.dy <0){
-                  dir="up";
-                }
-                //print(dir);
-              },
-              onHorizontalDragUpdate:(details){
-                if(details.delta.dx >0){
-                  dir="right";
-                }
-                else if(details.delta.dx <0){
-                  dir="left";
-                }
-                //print(dir);
-              } ,
 
-              child: Container(
-                child: GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: ns,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: nr,
-                ) , itemBuilder: (BuildContext context, int index){
-                     if(mc && index==pl){
-                       return Padding(padding: EdgeInsets.all(4),
-                       child: Container(
-                         decoration: BoxDecoration(
-                           color: Colors.yellow,
-                           shape: BoxShape.circle,
-                         ),
-                       ) ,
-                       );
-                     }
-                    else if(pl == index){
-                      switch(dir){
-                        case "left": return Transform.rotate(angle: pi,child: MyPacman(),);
-                          break;
-                        case "right":
-                          return MyPacman();
-                          break;
-                        case "up":
-                          return Transform.rotate(angle: 3*pi/2,child: MyPacman(),);
-                        break;
-                        case "down":
-                          return Transform.rotate(angle: pi/2,child: MyPacman(),);
-                        break;
-                        default:  return MyPacman();
+      body: (!gover && !nofood ) ?Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/garden.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 5,
+              child: GestureDetector(
+                onVerticalDragUpdate: (details){
+                  if(details.delta.dy >0){
+                    dir="down";
+                  }
+                  else if(details.delta.dy <0){
+                    dir="up";
+                  }
+                  //print(dir);
+                },
+                onHorizontalDragUpdate:(details){
+                  if(details.delta.dx >0){
+                    dir="right";
+                  }
+                  else if(details.delta.dx <0){
+                    dir="left";
+                  }
+                  //print(dir);
+                } ,
 
+                child: Container(
+                  child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: ns,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: nr,
+                  ) , itemBuilder: (BuildContext context, int index){
+                       if(mc && index==pl){
+                         return Padding(padding: EdgeInsets.all(4),
+                         child: Container(
+                           decoration: BoxDecoration(
+                             color: Colors.yellow,
+                             shape: BoxShape.circle,
+                           ),
+                         ) ,
+                         );
+                       }
+                      else if(pl == index){
+                        switch(dir){
+                          case "left": return Transform.rotate(angle: pi,child: MyPacman(),);
+                            break;
+                          case "right":
+                            return MyPacman();
+                            break;
+                          case "up":
+                            return Transform.rotate(angle: 3*pi/2,child: MyPacman(),);
+                          break;
+                          case "down":
+                            return Transform.rotate(angle: pi/2,child: MyPacman(),);
+                          break;
+                          default:  return MyPacman();
+
+                        }
                       }
-                    }
 
-                    else if((gh==index) && (s==true)){
-                      return MyGhost();
-                     }
-                    else if(barriers.contains(index)){
-                      return Mysquare(
-                        //child: Text(index.toString()),
-                        innercolor: Colors.blue[700],
-                        outercolor: Colors.blue[900],
-                      );
-                     }
-                     else if(food.contains(index) && s==true){
+                      else if((gh==index) && (s==true)){
+                        return MyGhost();
+                       }
+                      else if(barriers.contains(index)){
+                        return Mysquare(
+                          //child: Text(index.toString()),
+                          innercolor: Colors.blue[700],
+                          outercolor: Colors.blue[900],
+                        );
+                       }
+                       else if(food.contains(index) && s==true){
 
-                       return Mypath(
-                          // child: Text(index.toString()),
+                         return Mypath(
+                            // child: Text(index.toString()),
+                             innercolor: Colors.yellow[300],
+                             outercolor: Colors.white,
+                    );
+                       }
+                       else if (!food.contains(index) && s==true){
+                         return Myfood(
+                           innercolor: Colors.transparent,
+                           outercolor: Colors.transparent,
+                         );
+                      }
+                       else{
+                         return Mypath(
+                           //child: Text(index.toString()),
                            innercolor: Colors.yellow[300],
-                           outercolor: Colors.white,
-                  );
-                     }
-                     else if (!food.contains(index) && s==true){
-                       return Myfood(
-                         innercolor: Colors.white,
-                         outercolor: Colors.white,
-                       );
-                    }
-                     else{
-                       return Mypath(
-                         //child: Text(index.toString()),
-                         innercolor: Colors.yellow[300],
-                         outercolor: Colors.white,
-                       );
-                    }
-                }),
+                           outercolor: Colors.transparent,
+                         );
+                      }
+                  }),
+
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text("Score: "+ score.toString() ,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 40,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: start,
+                      child: Text("P L A Y",style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 40,
+                      ),
+                      ),
+                    ),
+                  ],
+                ),
 
               ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text("Score: "+ score.toString() ,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 40,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: start,
-                    child: Text("P L A Y",style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 40,
-                    ),
-                    ),
-                  ),
-                ],
-              ),
-
-            ),
-          ),
-        ],
+          ],
+        ),
       ) : Gameover(t: score,)
     );
   }

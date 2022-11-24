@@ -63,7 +63,7 @@ class _LeaderboardState extends State<Leaderboard> {
   }
 
   Timer? _timer;
-  int _start = 500;
+  int _start = 5000;
 
   void startTimer() {
     const oneSec = const Duration(seconds: 1);
@@ -122,8 +122,8 @@ class _LeaderboardState extends State<Leaderboard> {
                           userDet!.activated == false
                               ? ''
                               : 'Cyber Smart!👑️️',
-                          // 'Ends in: ${(_start ~/ 3600)}h ${((_start - (_start ~/ 3600) * 3600)) ~/ 60}m ${_start - ((_start ~/ 3600) * 3600) - ((((_start - (_start ~/ 3600) * 3600)) ~/ 60) * 60)}s ',
-                          "",
+                          'Ends in: ${(_start ~/ 3600)}h ${((_start - (_start ~/ 3600) * 3600)) ~/ 60}m ${_start - ((_start ~/ 3600) * 3600) - ((((_start - (_start ~/ 3600) * 3600)) ~/ 60) * 60)}s ',
+
                           'Go Now',
                           'assets/images/board.png',
                           '100 🥇',
@@ -204,23 +204,12 @@ class _LeaderboardState extends State<Leaderboard> {
                   flex: 5,
                   child: Row(
                     children: [
-                      ClipPolygon(
-                        boxShadows: [
-                          PolygonBoxShadow(
-                              color: AppColors.primary, elevation: 2.0)
-                        ],
-                        sides: 5,
-                        borderRadius: 8.0,
-                        child: Container(
-                          color: AppColors.primary,
-                          child: Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: ClipPolygon(
-                              child: Image.network(url!),
-                              borderRadius: 5,
-                              sides: 5,
-                            ),
-                          ),
+                    CircleAvatar(
+                        backgroundColor: AppColors.primary,
+                        radius: 27,
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(url!),
+                          radius: 25,
                         ),
                       ),
                       SizedBox(
@@ -241,7 +230,7 @@ class _LeaderboardState extends State<Leaderboard> {
                                 )),
                           ),
                           (rank >= 0 && rank <= 9) && showAmount
-                              ? Text('\$ ${rew[rank + 1]}',
+                              ? Text('${rew[rank + 1] * 100} Points',
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.w600,
@@ -302,7 +291,7 @@ class _LeaderboardState extends State<Leaderboard> {
                 children: [
                   Text(text,
                       style: Theme.of(context).textTheme.headline6?.copyWith(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 18)),
                   SizedBox(

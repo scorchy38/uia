@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:uia/services/gold_change_notifier.dart';
 import 'package:emojis/emoji.dart';
 import 'package:flutter/foundation.dart';
@@ -117,10 +118,42 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
           value: totalCellsRevealed / (size * size - totalMines),
           valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple),
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            primary: true,
-            child: buildRules(),
+        SizedBox(height: 30,),
+        InkWell(
+          onTap: () {
+            launch("https://stormy-walnut-516.notion.site/Cyber-Wiki-ed6a114b6703457580f97bc769581945");
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) =>
+            //             const Wallet()));
+          },
+          child: Card(
+            elevation: 3,
+            color: AppColors.primary,
+            child: Padding(
+              padding:
+              const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 10),
+              child: Container(
+                height: 15,
+                child: Center(
+                  child: Text(
+                      "Know More About These Images 🔡",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          ?.copyWith(
+                          color: AppColors
+                              .text,
+                          fontSize: 14,
+                          fontWeight:
+                          FontWeight
+                              .bold)),
+                ),
+              ),
+            ),
           ),
         )
       ],
@@ -173,15 +206,17 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
           ? showDialog(
               context: context,
               builder: (ctx) => AlertDialog(
-                title: Text("Wrong Link"),
-                content: Text("Information about wrong link. Last Warning ☠️"),
+                title: Text("Unsecure Link!❌"),
+                content: Text("Points have been deducted. ☠️"),
                 actions: [
                   MaterialButton(
                     color: Colors.deepPurple,
                     onPressed: () {
                       Navigator.of(context).pop(true);
                     },
-                    child: Text("OK 😰"),
+                    child: Text("Try Again 😰", style: TextStyle(
+                      color: Colors.white
+                    ),),
                   ),
                 ],
               ),
@@ -190,14 +225,16 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
               context: context,
               builder: (ctx) => AlertDialog(
                 title: Text("Game Over 🙃"),
-                content: Text("Information about wrong link"),
+                content: Text("You couldn't find all the perfect images!"),
                 actions: [
                   MaterialButton(
                     color: Colors.deepPurple,
                     onPressed: () {
                       Navigator.of(context).pop(true);
                     },
-                    child: Text("Adios"),
+                    child: Text("Try Again!", style: TextStyle(
+                      color: Colors.white
+                    ),),
                   ),
                 ],
               ),
@@ -275,6 +312,7 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: Text("Perfect Game"),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: Text(score.toString()),
@@ -282,9 +320,13 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
           ),
         ],
       ),
-      body: Container(
-        margin: const EdgeInsets.all(1.0),
-        child: buildButtonColumn(),
+      body: Padding(
+
+        padding: const EdgeInsets.only(left: 8.0, right: 8, top: 30),
+        child: Container(
+          margin: const EdgeInsets.all(1.0),
+          child: buildButtonColumn(),
+        ),
       ),
     );
   }

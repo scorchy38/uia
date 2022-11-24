@@ -75,6 +75,7 @@ flutter:
     - assets/illustration/
     - assets/images/
     - assets/dice/
+    - assets/pics/
     - lib/images/
 
   fonts:
@@ -86,4 +87,8 @@ flutter:
         - asset: assets/fonts/italic.ttf
           style: italic
         - asset: assets/fonts/regular.ttf
+    - family: Bungee
+      fonts:
+        - asset: assets/fonts/bungee/Bungee-Regular.ttf
+
 

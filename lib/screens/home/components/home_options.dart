@@ -206,24 +206,24 @@ class _HomeOptionsState extends State<HomeOptions> {
                       ),
                       children: [
                         SurveyTile('Perfect Game', 'Good Links vs Bad Links',
-                            'assets/images/link.png', '4-6', () {
+                            'assets/images/link.png', '7-10', () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => FoodStylePage()));
                         }),
                         SurveyTile('Virus Run', 'Virus Protection',
-                            'assets/images/virus.png', '4-6', () {
+                            'assets/images/virus.png', '11-15', () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) => Home()));
                         }),
                         SurveyTile('Hackers v/s Us', 'Cyber Crimes Learning',
-                            'assets/images/hacker.png', '4-6', () {
+                            'assets/images/hacker.png', '7-10', () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) => HP()));
                         }),
                         SurveyTile('Password Clash', 'Fight With a Friend',
-                            'assets/images/clash.png', '4-6', () {
+                            'assets/images/clash.png', '11-15', () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(

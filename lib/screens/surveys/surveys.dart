@@ -1,4 +1,5 @@
 import 'package:uia/core/constants/app_colors.dart';
+import 'package:uia/screens/passwordClash/start_screen.dart';
 import 'package:uia/screens/surveys/components/webview.dart';
 import 'package:uia/test.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_pollfish/flutter_pollfish.dart';
 import '../../homepage.dart';
 import '../game/game.dart';
 import '../home_page.dart';
+import '../passwordClash/startGameScreen.dart';
 import 'components/item_tile.dart';
 
 // Pollfish basic configuration options
@@ -110,7 +112,7 @@ class _OrderPageState extends State<OrderPage> {
                     'Perfect Game',
                     'Identify the theft',
                     'assets/images/link.png',
-                        '4-6',
+                        '7-10',
                         () {
                   Navigator.push(
                       context,
@@ -125,9 +127,17 @@ class _OrderPageState extends State<OrderPage> {
                   _launchURL(context, 'https://studio.code.org/projects/applab/XHH5FtCXrSZwFJ62G59YkjhSezR3ndrB7vPp1gkEipU');
 
                 }),
+                SurveyTile(
+                    'Identify Bad Link',
+                    'OTP Skills',
+                    'assets/images/zombie_.png',
+                    '4-6',() {
+                  _launchURL(context, 'https://studio.code.org/projects/applab/pllrD1tdhlV0i03CoXc_nEjgdz8K6-v_FlRJ6JYzyX4');
+
+                }),
                 SurveyTile('Virus Run', 'Virus Protection',
                     'assets/images/virus.png',
-                    '4-6',() {
+                    '11-15',() {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -135,7 +145,7 @@ class _OrderPageState extends State<OrderPage> {
                     }),
 
                 SurveyTile('Hackers v/s Us', 'Cyber Crimes Learning',
-                    'assets/images/hacker.png', '4-6', () {
+                    'assets/images/hacker.png', '7-10', () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -143,9 +153,11 @@ class _OrderPageState extends State<OrderPage> {
 
                     })
                 ,SurveyTile('Password Clash', 'Fight With a Friend',
-                    'assets/images/clash.png',  '4-6', () {
-                      _launchURL(context,
-                          'https://offers.monlix.com/?appid=2909&userid=vkumarsaraswat@gmail.com');
+                    'assets/images/clash.png',  '11-15', () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StartScreen()));
                     }),
               ],
             ),
