@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:uia/screens/passwordClash/analysis_sheet.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uia/screens/passwordClash/constant.dart';
+import 'package:uia/screens/passwordClash/start_screen.dart';
 import 'package:uia/services/database/room_database_helper.dart';
 import 'package:uia/services/database/user_database_helper.dart';
 
@@ -25,13 +27,27 @@ class _PCGameScreenState extends State<PCGameScreen> {
   DocumentReference? ref;
   int currentLevel = 1;
   int opponentNumber = 0;
+  final assetsAudioPlayer2 = AssetsAudioPlayer();
+
   int count = 0;
 
   @override
   void initState() {
     ref = FirebaseFirestore.instance.collection('passClash').doc(widget.gameID);
     opponentNumber = widget.userNumber == 1 ? 2 : 1;
+    assetsAudioPlayer.pause();
+    assetsAudioPlayer1.pause(); assetsAudioPlayer.stop();
+    assetsAudioPlayer1.stop();
+    assetsAudioPlayer2.open(
 
+
+        Audio("assets/audios/waiting.mp3"),
+        autoStart: true,
+        showNotification: false,
+        playInBackground: PlayInBackground.disabledPause,
+
+        loopMode: LoopMode.none
+    );
     // TODO: implement initState
     super.initState();
   }

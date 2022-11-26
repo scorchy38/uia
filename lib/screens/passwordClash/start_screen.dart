@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uia/screens/passwordClash/pcGameScreen.dart';
 
@@ -16,10 +17,11 @@ class StartScreen extends StatefulWidget {
   @override
   State<StartScreen> createState() => _StartScreenState();
 }
+final assetsAudioPlayer = AssetsAudioPlayer();
+
 class _StartScreenState extends State<StartScreen> {
 
   final myBox = 'Hive.box()';
-  final assetsAudioPlayer = AssetsAudioPlayer();
 
   @override
   void initState() {
@@ -78,6 +80,8 @@ UnderlineInputBorder underlineInputBorder = UnderlineInputBorder(
   borderSide: BorderSide(color: AppColors.primary),
 );
 // three buttons
+final assetsAudioPlayer1 = AssetsAudioPlayer();
+
 Column Buttons(context){
   return Column(
     children: [
@@ -85,6 +89,16 @@ Column Buttons(context){
       Lottie.asset('assets/pics/fight.json', height: 200),
       InkWell(
           onTap:() async {
+            assetsAudioPlayer1.open(
+
+
+                Audio("assets/audios/click.mp3"),
+                autoStart: true,
+                showNotification: false,
+                playInBackground: PlayInBackground.disabledPause,
+
+                loopMode: LoopMode.none
+            );
             String roomId = await RoomDatabaseHelper().createRoom();
             Navigator.push(
                 context,
@@ -98,6 +112,17 @@ Column Buttons(context){
       ),
       InkWell(
         onTap:(){
+          assetsAudioPlayer.stop();
+          assetsAudioPlayer1.open(
+
+
+              Audio("assets/audios/click.mp3"),
+              autoStart: true,
+              showNotification: false,
+              playInBackground: PlayInBackground.disabledPause,
+
+              loopMode: LoopMode.none
+          );
           showDialog(
 
               context: context,builder:(context) { return AlertDialog(
@@ -137,8 +162,20 @@ Column Buttons(context){
                           BorderRadius.all(Radius.circular(10)),
                           color: AppColors.complimentary),
                       child: InkWell(
+
                         onTap: () async {
+                          assetsAudioPlayer1.open(
+
+
+                              Audio("assets/audios/click.mp3"),
+                              autoStart: true,
+                              showNotification: false,
+                              playInBackground: PlayInBackground.disabledPause,
+
+                              loopMode: LoopMode.none
+                          );
                           RoomDatabaseHelper().joinGame(control.text);
+                          assetsAudioPlayer.stop();
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -176,9 +213,15 @@ Column Buttons(context){
       SizedBox(
         height: 10,
       ),
-      Padding(
-        padding: const EdgeInsets.only(right: 18.0),
-        child: Image.asset('assets/pics/about.png'),
+      InkWell(
+        onTap:(){
+          launch('https://caramel-lancer-bfd.notion.site/Password-Clash-3db38109e33349de80c0eee52d2af7c2');
+        },
+        child: Padding(
+
+          padding: const EdgeInsets.only(right: 18.0),
+          child: Image.asset('assets/pics/about.png'),
+        ),
       ),
 
 

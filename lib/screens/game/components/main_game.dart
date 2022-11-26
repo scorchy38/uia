@@ -121,7 +121,7 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
         SizedBox(height: 30,),
         InkWell(
           onTap: () {
-            launch("https://stormy-walnut-516.notion.site/Cyber-Wiki-ed6a114b6703457580f97bc769581945");
+            launch("https://caramel-lancer-bfd.notion.site/Perfect-Game-932bf5e30c6b4f7f8a9bdec5f8efda39");
             // Navigator.push(
             //     context,
             //     MaterialPageRoute(
@@ -155,7 +155,16 @@ class _FoodSuggestionsState extends State<FoodSuggestions>
               ),
             ),
           ),
-        )
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text("Score: "+ score.toString() ,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 40,
+          ),
+        ),
       ],
     );
   }
